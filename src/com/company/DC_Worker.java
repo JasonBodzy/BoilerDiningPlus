@@ -24,18 +24,23 @@ public class DC_Worker implements Runnable{
     private static Socket clientSocket;
 
     public static void main(String[] args) {
-
+        // connects to server writes 1
         protocol();
+        // engages GUI
         SwingUtilities.invokeLater(new DC_Worker());
 
+        // Formats date and time
         SimpleDateFormat formatter = new SimpleDateFormat("ss");
         SimpleDateFormat mainFormatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         boolean printed = false;
+        // loop through every second
         while (true) {
             Date date = new Date();
+            // Every minute
             if(formatter.format(date).equalsIgnoreCase("00") && !printed) {
                 System.out.println("Minute!");
                 System.out.println(swipes);
+                // Write new data object to server every minute
                 writeToServer(new Data(swipes, crowded, mainFormatter.format(date), court, true ), clientSocket);
                 swipes = 0;
                 printed = true;
@@ -46,6 +51,7 @@ public class DC_Worker implements Runnable{
 
     }
 
+    // Connects to the server and writes 1
     public static void protocol() {
         try {
             clientSocket = new Socket("localhost", 4242);
@@ -58,6 +64,7 @@ public class DC_Worker implements Runnable{
         }
     }
 
+    // Called every minute, writes a data object to the server
     public static void writeToServer(Data data, Socket socket) {
         if (connected) {
             try {
@@ -69,7 +76,7 @@ public class DC_Worker implements Runnable{
         }
     }
 
-
+    // GUI Tracks swipes, every 15 swipes, updates crowded
     @Override
     public void run() {
         String[] courts = {"Ford", "Wiley", "Windsor", "Hillenbrand", "Earhart"};
