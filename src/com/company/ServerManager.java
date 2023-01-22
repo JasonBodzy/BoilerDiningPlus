@@ -7,7 +7,8 @@ import java.net.Socket;
  * Uses port 4242 to connect to the server
  */
 
-public class ServerManager {
+public class ServerManager extends Thread {
+    public Data currentData;
     public static void main(String[] args) {
         try {
             while (true) {
@@ -19,5 +20,13 @@ public class ServerManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Data getCurrentData() {
+        return currentData;
+    }
+
+    public void setCurrentData(Data data) {
+        this.currentData = data;
     }
 }
