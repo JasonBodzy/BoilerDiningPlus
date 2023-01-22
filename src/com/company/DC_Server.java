@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class DC_Server extends ServerManager implements Runnable {
@@ -37,8 +39,22 @@ public class DC_Server extends ServerManager implements Runnable {
                         }
 
                     } else {
-                        writer.println();
-                        writer.flush();
+                        boolean written = false;
+                        while (true) {
+                            Date date = new Date();
+                            SimpleDateFormat formatter = new SimpleDateFormat("ss");
+                            // Every minute
+                            if(formatter.format(date).equalsIgnoreCase("00") && !written) {
+                                // Write new data object to client every minute
+                                ObjectOutputStream clientWriter = new ObjectOutputStream(socket.getOutputStream());
+                                clientWriter.writeObject(super.getCurrentData());
+                                clientWriter.flush();
+                                written = true;
+                            } else if (formatter.format(date).equalsIgnoreCase("01")) {
+                                written = false;
+                            }
+                        }
+
                     }
                 }
             }
