@@ -26,8 +26,14 @@ public class DC_Server extends ServerManager implements Runnable {
                     if (message == 1) {
                         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                         while (true) {
+                            // constantly reading data
                             Data data = (Data) objectInputStream.readObject();
                             super.setCurrentData(data);
+
+                            // When DC closes end connection protocol
+                            if (!data.isOpen) {
+                                break;
+                            }
                         }
 
                     } else {

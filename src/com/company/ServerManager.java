@@ -8,6 +8,7 @@ import java.net.Socket;
  */
 
 public class ServerManager extends Thread {
+    // Current Data
     public Data currentData;
     public static void main(String[] args) {
         try {
