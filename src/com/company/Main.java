@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 public class Main extends JComponent implements Runnable{
 
     private Data data;
-
+    private int current_location;
 
     JButton fordButton;
     JButton hillyButton;
@@ -136,27 +136,27 @@ public class Main extends JComponent implements Runnable{
 
         fordButton.addActionListener( new ActionListener() {
             public void actionPerformed( ActionEvent e ){
-
+                current_location = 1;
             }
         } );
         hillyButton.addActionListener( new ActionListener() {
             public void actionPerformed( ActionEvent e ){
-
+                current_location = 2;
             }
         } );
         wileyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                current_location = 3;
             }
         });
         earhartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                current_location = 4;
             }
         });
         windsorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                current_location = 5;
             }
         });
     }
