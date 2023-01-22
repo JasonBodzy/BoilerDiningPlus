@@ -7,11 +7,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Locale;
 
-public class DC_Server extends Thread implements Runnable {
+public class DC_Server extends ServerManager implements Runnable {
     private Socket socket;
-
+    private Data currentData;
     DC_Server(Socket socket) {
         this.socket = socket;
+        this.currentData = super.getCurrentData();
     }
 
     @Override
@@ -25,7 +26,14 @@ public class DC_Server extends Thread implements Runnable {
                     if (message == 1) {
                         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                         while (true) {
+                            // constantly reading data
                             Data data = (Data) objectInputStream.readObject();
+                            super.setCurrentData(data);
+
+                            // When DC closes end connection protocol
+                            if (!data.isOpen) {
+                                break;
+                            }
                         }
 
                     } else {
