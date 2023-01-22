@@ -89,17 +89,7 @@ public class Main extends JComponent implements Runnable{
         panelLabels.add(waitLabel);
         content.add(panelLabels, BorderLayout.CENTER);
 
-        swipesLabel2 = new JLabel(String.valueOf(data.swipes));
-        panelLabels2.add(swipesLabel2);
-        content.add(panelLabels2, BorderLayout.CENTER);
 
-        openLabel2 = new JLabel(String.valueOf(data.isOpen));
-        panelLabels2.add(openLabel2);
-        content.add(panelLabels2, BorderLayout.CENTER);
-
-        waitLabel2 = new JLabel(String.valueOf(data.wait));
-        panelLabels2.add(waitLabel2);
-        content.add(panelLabels2, BorderLayout.CENTER);
 
         /* connect to socket       */
         /* if failure exit program */
@@ -132,6 +122,21 @@ public class Main extends JComponent implements Runnable{
             JOptionPane.showMessageDialog(null, "Class Not Found Error.", "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
+        }
+
+        if (data != null) {
+            swipesLabel2 = new JLabel(String.valueOf(data.swipes));
+            panelLabels2.add(swipesLabel2);
+            content.add(panelLabels2, BorderLayout.CENTER);
+
+            openLabel2 = new JLabel(String.valueOf(data.isOpen));
+            panelLabels2.add(openLabel2);
+            content.add(panelLabels2, BorderLayout.CENTER);
+
+            waitLabel2 = new JLabel(String.valueOf(data.wait));
+            panelLabels2.add(waitLabel2);
+            content.add(panelLabels2, BorderLayout.CENTER);
+
         }
 
         fordButton.addActionListener( new ActionListener() {
