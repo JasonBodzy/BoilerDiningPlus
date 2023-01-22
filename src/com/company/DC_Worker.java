@@ -7,9 +7,7 @@ import java.io.*;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.logging.SimpleFormatter;
 
 public class DC_Worker implements Runnable{
 
