@@ -3,9 +3,7 @@ package com.company;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,8 +66,8 @@ public class DC_Worker implements Runnable{
     public static void writeToServer(Data data, Socket socket) {
         if (connected) {
             try {
-                PrintWriter clientWriter = new PrintWriter(socket.getOutputStream());
-                clientWriter.write(data.toString());
+                ObjectOutputStream clientWriter = new ObjectOutputStream(socket.getOutputStream());
+                clientWriter.writeObject(data);
             } catch (Exception e) {
                 e.printStackTrace();
             }
